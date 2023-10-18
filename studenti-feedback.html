@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studenti feedback</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="index.html">
+          <img src="img/logo.png" alt="" />
+        </a>
+      </div>
+      <div class="header-link">
+        <ul>
+          <li>l'istituto</li>
+          <li>studenti e famiglie</li>
+          <li>modulistica</li>
+          <li>circolari</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="container2">
+      <h2>Valutazione del Corso</h2>
+      <form action="#" method="post">
+        <label for="corso">Seleziona il corso:</label>
+        <select id="corso" name="corso">
+          <option value="corso1">Corso 1</option>
+          <option value="corso2">Corso 2</option>
+          <option value="corso3">Corso 3</option>
+          <option value="corso4">Corso 4</option>
+        </select>
+
+        <label>Valutazione del corso:</label>
+        <div class="feedback-stars">
+          <div class="rating">
+            <i class="rating__star far fa-star" value="pessimo"></i>
+            <i class="rating__star far fa-star" value="discreto"></i>
+            <i class="rating__star far fa-star" value="buono"></i>
+            <i class="rating__star far fa-star" value="ottimo"></i>
+            <i class="rating__star far fa-star" value="eccellente"></i>
+          </div>
+        </div>
+
+        <label for="review">Scrivi una recensione:</label>
+        <textarea id="review" name="review" class="review-text"></textarea>
+
+        <button type="submit">Invia Valutazione</button>
+      </form>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
