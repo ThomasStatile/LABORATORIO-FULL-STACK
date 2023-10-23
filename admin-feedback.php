@@ -22,7 +22,7 @@
         </ul>
       </div>
     </header>
-
+    <div class="go-back"><a class="button" href="admin-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
     <form method="POST" action="admin-feedback.php">
       <div class="dropdown-container">
         <label for="corso">Scegli il corso:</label>

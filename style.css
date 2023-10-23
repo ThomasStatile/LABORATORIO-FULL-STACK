@@ -103,7 +103,7 @@ a {
   border: 1px solid #ccc;
   border-radius: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  margin-top: 3rem;
+  margin-top: 9rem;
 }
 
 .form-group {
@@ -165,7 +165,7 @@ table {
   border-collapse: collapse;
   width: 70%;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 8rem;
 }
 
 th,
@@ -290,4 +290,20 @@ button {
   background-color: green;
   color: white;
   text-transform: uppercase;
+}
+.go-back{
+  position: absolute;
+  margin-top: 2rem;
+  padding: 10px;
+  left: 4rem;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+}
+.go-back a{
+color: white;
+margin-right: 10px;
 }

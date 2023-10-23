@@ -26,7 +26,7 @@
         </ul>
       </div>
     </header>
-
+    <div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
     <?php
 
     require_once('php/config.php');
