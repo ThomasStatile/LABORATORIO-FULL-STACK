@@ -11,22 +11,8 @@
     <title>Voti Studente</title>
   </head>
   <body>
-    <header>
-      <div class="logo">
-        <a href="index.php">
-          <img src="img/logo.png" alt="" />
-        </a>
-      </div>
-      <div class="header-link">
-        <ul>
-          <li>l'istituto</li>
-          <li>studenti e famiglie</li>
-          <li>modulistica</li>
-          <li>circolari</li>
-        </ul>
-      </div>
-    </header>
-    <div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+    
+    
     <?php
 
     require_once('php/config.php');
@@ -48,6 +34,26 @@
             if($result){
               if ($result->num_rows > 0) {
                 echo '
+                <header>
+                  <div class="logo">
+                    <a href="index.php">
+                      <img src="img/logo.png" alt="" />
+                    </a>
+                  </div>
+                  <div class="header-link">
+                    <ul>
+                      <li>istituto</li>
+                      <li>studenti e famiglie</li>
+                      <li>modulistica</li>
+                      <li>circolari</li>
+                    </ul>
+                  </div>
+                  <div class="user-links">
+                  <a href="studente-page.php"> <i class="fas fa-user"></i> </a>
+                  <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
+                  </div>
+                </header>
+                <div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
                 <table>
                 <thead>
                 <tr>
@@ -76,6 +82,21 @@
       } elseif ($_SESSION['tipoUtente'] == 2) {
             // L'utente è un amministratore
             echo '
+            <header>
+              <div class="logo">
+                <a href="index.php">
+                  <img src="img/logo.png" alt="" />
+                </a>
+              </div>
+              <div class="header-link">
+                <ul>
+                  <li>istituto</li>
+                  <li>studenti e famiglie</li>
+                  <li>modulistica</li>
+                  <li>circolari</li>
+                </ul>
+              </div>
+            </header>
             <h1> Non sei autorizzato ad accedere a questa pagina </h1>
             <a href="admin-page.php">Vai alla tua area privata. </a> 
             ';
@@ -84,6 +105,21 @@
     } else {
         // La sessione non contiene il tipo di utente, quindi l'utente non è autenticato
         echo '
+        <header>
+          <div class="logo">
+            <a href="index.php">
+              <img src="img/logo.png" alt="" />
+            </a>
+          </div>
+          <div class="header-link">
+            <ul>
+              <li>istituto</li>
+              <li>studenti e famiglie</li>
+              <li>modulistica</li>
+              <li>circolari</li>
+            </ul>
+          </div>
+        </header>
         <h1> Non sei autorizzato ad accedere a questa pagina.</h1>
         <p> <a href="registrazione.php"> Registrati </a>  oppure effettua il <a href="login.php"> Login </a>
 

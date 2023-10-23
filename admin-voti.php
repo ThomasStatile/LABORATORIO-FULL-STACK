@@ -11,88 +11,137 @@
     <title>Admin voti</title>
   </head>
   <body>
-    <header>
-      <div class="logo">
-        <a href="index.php">
-          <img src="img/logo.png" alt="" />
-        </a>
-      </div>
-      <div class="header-link">
-        <ul>
-          <li>l'istituto</li>
-          <li>studenti e famiglie</li>
-          <li>modulistica</li>
-          <li>circolari</li>
-        </ul>
-      </div>
-    </header>
-    <div class="go-back"><a class="button" href="admin-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
-    <form method="POST" action="admin-voti.php">
-      <div class="dropdown-container">
-        <label for="corso">Scegli il corso:</label>
-        <select id="corso" name="corso">
-          <option value="Sviluppo Frontend">Sviluppo Frontend</option>
-          <option value="Sviluppo Backend">Sviluppo Backend</option>
-          <option value="UX/UI Design">UX/UI Design</option>
-          <option value="Database">Database</option>
-          <option value="Inglese">Inglese</option>
-          <option value="DevOps">DevOps</option>
-          <option value="Big Data">Big Data</option>
-        </select>
-        <button type="submit">Visualizza</button>
-      </div>
-    </form>
 
     <?php
     
   require_once('php/config.php');
 
   session_start();
-    if (!isset($_SESSION['username'])) {
-        // L'utente non è autenticato, reindirizzalo al login
-        header("Location: login.php");
-        exit();
-    }
+    if (isset($_SESSION['username'])) {
+      if ($_SESSION['tipoUtente'] == 2) {
   
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $corso = $connessione->real_escape_string($_POST['corso']);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          $corso = $connessione->real_escape_string($_POST['corso']);
 
-    $sql = "SELECT CONCAT(u.nome, u.cognome) AS Studente, vc.voto
-    FROM utenti u
-    INNER JOIN voti_corsi vc ON vc.id_utente = u.idUtente
-    INNER JOIN corsi c ON c.idcorso = vc.id_corso
-    WHERE corso = '$corso'
-    GROUP BY Studente, vc.voto;";
+          $sql = "SELECT CONCAT(u.nome, u.cognome) AS Studente, vc.voto
+          FROM utenti u
+          INNER JOIN voti_corsi vc ON vc.id_utente = u.idUtente
+          INNER JOIN corsi c ON c.idcorso = vc.id_corso
+          WHERE corso = '$corso'
+          GROUP BY Studente, vc.voto;";
 
-    $result = $connessione->query($sql);
-    if($result){
-      if ($result->num_rows > 0) {
-        echo '
-        <table>
-        <thead>
-        <tr>
-        <th>Studente</th>
-        <th>Voto</th>
-        </tr>
-        </thead>
-        <tbody> 
-        ';
-        while($row = $result->fetch_array()){
-          echo '
-          <tr>
-          <td>' . $row['Studente'] . '</td>
-          <td>' . $row['voto'] . '</td>
-          </tr> 
-          ';
+          $result = $connessione->query($sql);
+          if($result){
+            if ($result->num_rows > 0) {
+              echo '
+              <header>
+                <div class="logo">
+                  <a href="index.php">
+                    <img src="img/logo.png" alt="" />
+                  </a>
+                </div>
+                <div class="header-link">
+                  <ul>
+                    <li>istituto</li>
+                    <li>studenti e famiglie</li>
+                    <li>modulistica</li>
+                    <li>circolari</li>
+                  </ul>
+                </div>
+                <div class="user-links">
+                <a href="admin-page.php"> <i class="fas fa-user"></i> </a>
+                <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
+                </div>
+              </header>
+              <div class="go-back"><a class="button" href="admin-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+
+              <form method="POST" action="admin-voti.php">
+                <div class="dropdown-container">
+                  <label for="corso">Scegli il corso:</label>
+                  <select id="corso" name="corso">
+                    <option value="Sviluppo Frontend">Sviluppo Frontend</option>
+                    <option value="Sviluppo Backend">Sviluppo Backend</option>
+                    <option value="UX/UI Design">UX/UI Design</option>
+                    <option value="Database">Database</option>
+                    <option value="Inglese">Inglese</option>
+                    <option value="DevOps">DevOps</option>
+                    <option value="Big Data">Big Data</option>
+                  </select>
+                  <button type="submit">Visualizza</button>
+                </div>
+              </form>
+              <table>
+              <thead>
+              <tr>
+              <th>Studente</th>
+              <th>Voto</th>
+              </tr>
+              </thead>
+              <tbody> 
+              ';
+              while($row = $result->fetch_array()){
+                echo '
+                <tr>
+                <td>' . $row['Studente'] . '</td>
+                <td>' . $row['voto'] . '</td>
+                </tr> 
+                ';
+              }
+              echo '</tbody></table>';
+            }else{
+              echo 'Non ci sono righe per questo campo.';
+            }
+          }else{
+            echo "Impossibile eseguire la query $sql. " . $connessione->error;
+          }
         }
-        echo '</tbody></table>';
-      }else{
-        echo 'Non ci sono righe per questo campo.';
+      }elseif ($_SESSION['tipoUtente'] == 1) {
+        echo '
+        <header>
+          <div class="logo">
+            <a href="index.php">
+              <img src="img/logo.png" alt="" />
+            </a>
+          </div>
+          <div class="header-link">
+            <ul>
+              <li>istituto</li>
+              <li>studenti e famiglie</li>
+              <li>modulistica</li>
+              <li>circolari</li>
+            </ul>
+          </div>
+        </header>
+
+        <h1> Non sei autorizzato ad accedere a questa pagina </h1>
+        <a href="studente-page.php">Vai alla tua area privata. </a> 
+        ';
+      exit();
       }
-    }else{
-      echo "Impossibile eseguire la query $sql. " . $connessione->error;
-    }
-  }
+    } else {
+      echo '
+      <header>
+        <div class="logo">
+          <a href="index.php">
+            <img src="img/logo.png" alt="" />
+          </a>
+        </div>
+        <div class="header-link">
+          <ul>
+            <li>istituto</li>
+            <li>studenti e famiglie</li>
+            <li>modulistica</li>
+            <li>circolari</li>
+          </ul>
+        </div>
+      </header>
+
+      <h1> Non sei autorizzato ad accedere a questa pagina.</h1>
+      <p> <a href="registrazione.php"> Registrati </a>  oppure effettua il <a href="login.php"> Login </a>
+
+      ';
+      exit();
+    } 
   
   ?>
     
