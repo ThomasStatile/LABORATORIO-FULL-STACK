@@ -41,19 +41,28 @@
           <option value="Big Data" id="7">Big Data</option>
         </select>
 
-        <label for="rating">Valutazione del corso:</label>
+        <!-- <label for="rating">Valutazione del corso:</label>
         <div class="rating">
           <div class="rating">
-          <input type="radio" name="rating" value="1">1
-            <input type="radio" name="rating" value="2">2
-            <input type="radio" name="rating" value="3">3
-            <input type="radio" name="rating" value="4">4
-            <input type="radio" name="rating" value="5">5
+          <input type="radio" name="rating">★
+            <input type="radio" name="rating" >★
+            <input type="radio" name="rating" >★
+            <input type="radio" name="rating" >★
+            <input type="radio" name="rating" >★
           </div>
-        </div>
+        </div> -->
 
-        <label for="review">Scrivi una recensione:</label>
-        <textarea id="review" name="review" class="review-text"></textarea>
+        <label for="rating">Valutazione:</label>
+        <select id="rating" name="rating">
+          <option value="Pessimo" id="1">Pessimo</option>
+          <option value="Decente" id="2">Decente</option>
+          <option value="Buono" id="3">Buono</option>
+          <option value="Ottimo" id="4"> Ottimo</option>
+          <option value="Eccellente" id="5">Eccellente</option>
+        </select>
+
+        <label for="comment">Scrivi una recensione:</label>
+        <textarea id="comment" name="comment" class="review-text"></textarea>
 
         <button type="submit">Invia Valutazione</button>
       </form>
@@ -73,41 +82,42 @@
               $corso = $_POST["corso"];
               $rating = $_POST["rating"];
               $comment = $_POST["comment"];
+              $username = $_SESSION['username'];
               
-              $sql = " INSERT INTO feedback_corsi (id_utente, id_corso, feedback, testo_feedback)
-              VALUES ('4', '2', '3', 'Il corso ha soddisfatto in parte le mie aspettative'); ";
+              $sql1 = " SELECT idUtente
+              FROM utenti
+              WHERE username = '$username' ";
+              $resSql1 = $connessione->query($sql1);
+
+              if ($resSql1) {
+                $rowSql1 = $resSql1->fetch_assoc();
+                $idUtente = $rowSql1['idUtente']; 
+              
+              $sql2 = " SELECT idcorso 
+              FROM corsi
+              WHERE corso = '$corso'; ";
+              $resSql2 = $connessione->query($sql2);
+
+              if ($resSql2) {
+                $rowSql2 = $resSql2->fetch_assoc();
+                $idCorso = $rowSql2['idcorso'];
+
+              $sql3 = " INSERT INTO feedback_corsi (id_utente, id_corso, feedback, testo_feedback)
+              VALUES ('$idUtente', '$idCorso', '$rating', '$comment'); ";
           
-              $result = $connessione->query($sql);
-              if($result){
-                if ($result->num_rows > 0) {
-                  echo '
-                  <table>
-                  <thead>
-                  <tr>
-                  <th>Corso</th>
-                  <th>Voto</th>
-                  </tr>
-                  </thead>
-                  <tbody> 
-                  ';
-                while($row = $result->fetch_array()){
-                  echo '
-                  <tr>
-                  <td>' . $row['corso'] . '</td>
-                  <td>' . $row['voto'] . '</td>
-                  </tr> 
-                  ';
+          if ($connessione->query($sql3) === TRUE) {
+            echo "Feedback inserito con successo.";
+            } else {
+                echo "Errore nell'inserimento del feedback: " . $connessione->error;
             }
-              echo '</tbody></table>';
-            }else{
-              echo 'Non ci sono righe per questo campo.';
+            } else {
+                echo "Errore nell'esecuzione della query SQL2: " . $connessione->error;
             }
-            }else{
-              echo "Impossibile eseguire la query $sql. " . $connessione->error;
-            }
-            
-            }
-            
+            } else {
+                echo "Errore nell'esecuzione della query SQL1: " . $connessione->error;
+      }
+
+    }     
   
       } elseif ($_SESSION['tipoUtente'] == 2) {
             // L'utente è un amministratore
