@@ -3,7 +3,14 @@ body {
   padding: 0;
   position: relative;
 }
-
+.home-background{
+  background-image: url(img/homeback.jpg);
+  background-position: center;
+  background-repeat:no-repeat ;
+  background-size: cover;
+  width: 100%;
+  height: 85vh;
+}
 header {
   height: 15vh;
   width: 100%;
@@ -14,7 +21,21 @@ header {
   position: relative;
   background-color: green;
 }
-
+.message{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+}
+.message-btn{
+  margin-top: 2rem;
+  background-color: #166012;
+  padding: 15px;
+  border-radius: 5px;
+ margin-inline: 50%;
+ transform: translate(-50%);
+ width: 10rem;
+}
 .logo img {
   height: 8rem;
   width: 8rem;

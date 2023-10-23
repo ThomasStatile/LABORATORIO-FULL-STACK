@@ -39,9 +39,11 @@
           <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
           </div>
         </header>
+        <div class="home-background"></div>
         ';
       }elseif ($_SESSION['tipoUtente'] == 2) {
         echo '
+
         <header>
           <div class="logo">
             <a href="index.php">

@@ -119,8 +119,8 @@
             </div>
           </header>
 
-          <h1> Non sei autorizzato ad accedere a questa pagina </h1>
-          <a href="studente-page.php">Vai alla tua area privata. </a> 
+          <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
+          <a href="studente-page.php"><button class="message-btn">Vai alla tua area privata.</button> </a>
           ';
         exit();
         }
