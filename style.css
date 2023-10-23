@@ -291,7 +291,7 @@ button {
   color: white;
   text-transform: uppercase;
 }
-.go-back{
+.go-back {
   position: absolute;
   margin-top: 2rem;
   padding: 10px;
@@ -303,7 +303,7 @@ button {
   display: flex;
   flex-direction: row;
 }
-.go-back a{
-color: white;
-margin-right: 10px;
+.go-back a {
+  color: white;
+  margin-right: 10px;
 }
