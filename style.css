@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 header {
@@ -249,4 +250,24 @@ button {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.logout {
+  position: absolute;
+  right: 8rem;
+}
+
+#logout-icon {
+  font-size: 2rem;
+  color: black;
+  width: 2rem;
+}
+
+#logout-text {
+  width: 7rem;
+  height: 3rem;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  text-transform: uppercase;
 }

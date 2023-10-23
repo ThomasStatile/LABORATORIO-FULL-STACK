@@ -25,7 +25,7 @@
 
     <div class="container">
       <h2>Registrazione studente</h2>
-      <form action="#" method="post">
+      <form action="registrazione.php" method="post">
         <div class="form-group">
           <label for="nome">Nome:</label>
           <input type="text" id="nome" name="nome" required />
@@ -39,7 +39,7 @@
           <input type="text" id="username" name="username" required />
         </div>
         <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="email">email:</label>
           <input type="email" id="email" name="email" required />
         </div>
         <div class="form-group">
@@ -49,5 +49,33 @@
         <button type="submit">Registrati</button>
       </form>
     </div>
+
+    <?php
+
+require_once('php/config.php');
+
+
+$sql = "INSERT INTO utenti (nome, cognome, email, username, password, tipoUtente) VALUES ( ?, ?, ?, ?, ?, ?)";
+
+if($statement = $connessione->prepare($sql)){
+    $statement->bind_param("sssssi", $nome, $cognome, $email, $username, $password, $tipoUtente);
+
+    $nome = $_REQUEST['nome'];
+    $cognome = $_REQUEST['cognome'];
+    $email = $_REQUEST['email'];
+    $username = $_REQUEST['username'];
+    $password = $_REQUEST['password'];
+    $tipoUtente = '1';
+    $statement->execute();
+
+    header("Location: /LABORATORIO-FULL-STACK/login.php");
+}else{
+    echo "Errore durante registrazione utente $sql. " . $connessione->error;
+}
+
+$statement->close();
+
+$connessione->close();
+?>
   </body>
 </html>
