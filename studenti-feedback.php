@@ -13,7 +13,7 @@
   <body>
     <header>
       <div class="logo">
-        <a href="index.html">
+        <a href="index.php">
           <img src="img/logo.png" alt="" />
         </a>
       </div>
@@ -26,47 +26,6 @@
         </ul>
       </div>
     </header>
-    <div class="go-back"><a class="button" href="studente-page.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back</a></div>
-    <div class="container2">
-      <h2>Valutazione del Corso</h2>
-      <form action="studenti-feedback.php" method="post">
-        <label for="corso">Seleziona il corso:</label>
-        <select id="corso" name="corso">
-          <option value="Sviluppo Frontend" id="1">Sviluppo Frontend</option>
-          <option value="Sviluppo Backend" id="2">Sviluppo Backend</option>
-          <option value="UX/UI Design" id="3">UX/UI Design</option>
-          <option value="Database" id="4"> Database</option>
-          <option value="Inglese" id="5">Inglese</option>
-          <option value="DevOps" id="6">DevOps</option>
-          <option value="Big Data" id="7">Big Data</option>
-        </select>
-
-        <!-- <label for="rating">Valutazione del corso:</label>
-        <div class="rating">
-          <div class="rating">
-          <input type="radio" name="rating">★
-            <input type="radio" name="rating" >★
-            <input type="radio" name="rating" >★
-            <input type="radio" name="rating" >★
-            <input type="radio" name="rating" >★
-          </div>
-        </div> -->
-
-        <label for="rating">Valutazione:</label>
-        <select id="rating" name="rating">
-          <option value="Pessimo" id="1">Pessimo</option>
-          <option value="Decente" id="2">Decente</option>
-          <option value="Buono" id="3">Buono</option>
-          <option value="Ottimo" id="4"> Ottimo</option>
-          <option value="Eccellente" id="5">Eccellente</option>
-        </select>
-
-        <label for="comment">Scrivi una recensione:</label>
-        <textarea id="comment" name="comment" class="review-text"></textarea>
-
-        <button type="submit">Invia Valutazione</button>
-      </form>
-    </div>
 
     <?php
 
@@ -104,33 +63,13 @@
 
               $sql3 = " INSERT INTO feedback_corsi (id_utente, id_corso, feedback, testo_feedback)
               VALUES ('$idUtente', '$idCorso', '$rating', '$comment'); ";
-              }}}
-              $result = $connessione->query($sql);
-              if($result){
-                if ($result->num_rows > 0) {
-                  echo '
-                  <table>
-                  <thead>
-                  <tr>
-                  <th>Corso</th>
-                  <th>Voto</th>
-                  </tr>
-                  </thead>
-                  <tbody> 
-                  ';
-                  echo '<div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>';
-                while($row = $result->fetch_array()){
-                  echo '
-                  <tr>
-                  <td>' . $row['corso'] . '</td>
-                  <td>' . $row['voto'] . '</td>
-                  </tr> 
-                  ';
+          
           if ($connessione->query($sql3) === TRUE) {
-            echo "Feedback inserito con successo.";
+            // echo "Feedback inserito con successo.";
+            $feedbackInserito = true;
+            
             } else {
                 echo "Errore nell'inserimento del feedback: " . $connessione->error;
-
             }
             } else {
                 echo "Errore nell'esecuzione della query SQL2: " . $connessione->error;
@@ -140,6 +79,44 @@
       }
 
     }     
+
+    if (isset($feedbackInserito) && $feedbackInserito) {
+      echo "<h1>Feedback inserito con successo.</h1>";
+  } else {
+      echo '
+      <div class="container2">
+        <h2>Valutazione del Corso</h2>
+        <form action="studenti-feedback.php" method="post">
+          <label for="corso">Seleziona il corso:</label>
+          <select id="corso" name="corso">
+            <option value="Sviluppo Frontend" id="1">Sviluppo Frontend</option>
+            <option value="Sviluppo Backend" id="2">Sviluppo Backend</option>
+            <option value="UX/UI Design" id="3">UX/UI Design</option>
+            <option value="Database" id="4"> Database</option>
+            <option value="Inglese" id="5">Inglese</option>
+            <option value="DevOps" id="6">DevOps</option>
+            <option value="Big Data" id="7">Big Data</option>
+          </select>
+
+         <label for="rating">Valutazione:</label>
+          <select id="rating" name="rating">
+            <option value="Pessimo" id="1">Pessimo</option>
+            <option value="Decente" id="2">Decente</option>
+            <option value="Buono" id="3">Buono</option>
+            <option value="Ottimo" id="4"> Ottimo</option>
+            <option value="Eccellente" id="5">Eccellente</option>
+          </select>
+
+        <label for="comment">Scrivi una recensione:</label>
+        <textarea id="comment" name="comment" class="review-text"></textarea>
+
+        <button type="submit">Invia Valutazione</button>
+       </form>
+      </div>
+      ';
+  
+  }
+
   
       } elseif ($_SESSION['tipoUtente'] == 2) {
             // L'utente è un amministratore

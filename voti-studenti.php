@@ -4,16 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    />
     <title>Voti Studente</title>
   </head>
   <body>
     <header>
       <div class="logo">
-        <a href="index.html">
+        <a href="index.php">
           <img src="img/logo.png" alt="" />
         </a>
       </div>
@@ -57,7 +53,6 @@
                 </thead>
                 <tbody> 
                 ';
-                echo '<div class="go-back"><a class="button" href="studente-page.php"><i class="fa fa-arrow-left" aria-hidden="true">Go Back</i></a></div>';
             while($row = $result->fetch_array()){
             echo '
             <tr>
@@ -91,6 +86,7 @@
         ';
         exit();
     }
+    
     ?>
 
     

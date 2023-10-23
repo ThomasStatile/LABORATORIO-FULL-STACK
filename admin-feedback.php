@@ -4,16 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    />
     <title>Admin Feedback</title>
   </head>
   <body>
     <header>
       <div class="logo">
-        <a href="index.html">
+        <a href="index.php">
           <img src="img/logo.png" alt="" />
         </a>
       </div>
@@ -26,7 +22,6 @@
         </ul>
       </div>
     </header>
-    <div class="go-back"><a class="button" href="admin-page.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back</a></div>
 
     <form method="POST" action="admin-feedback.php">
       <div class="dropdown-container">
@@ -43,6 +38,7 @@
         <button type="submit">Visualizza</button>
       </div>
     </form>
+    
     <?php
     
     require_once('php/config.php');
