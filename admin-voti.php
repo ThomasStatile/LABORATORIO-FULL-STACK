@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
     <title>Admin voti</title>
   </head>
   <body>
     <header>
+
       <div class="logo">
         <a href="index.html">
           <img src="img/logo.png" alt="" />
@@ -22,7 +27,7 @@
         </ul>
       </div>
     </header>
-
+    <div class="go-back"><a class="button" href="admin-page.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back</a></div>
     <form method="POST" action="admin-voti.php">
       <div class="dropdown-container">
         <label for="corso">Scegli il corso:</label>

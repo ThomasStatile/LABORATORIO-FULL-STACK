@@ -3,7 +3,7 @@
 $servername = "localhost";
 $user = "root";
 $port = "3307";
-$password = "password";
+$password = "milano2023";
 $database = "fullstack_laboratorio";
 
 $connessione = new mysqli($servername, $user, $password, $database, $port);

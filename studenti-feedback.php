@@ -26,7 +26,7 @@
         </ul>
       </div>
     </header>
-
+    <div class="go-back"><a class="button" href="studente-page.php"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back</a></div>
     <div class="container2">
       <h2>Valutazione del Corso</h2>
       <form action="studenti-feedback.php" method="post">
@@ -90,6 +90,7 @@
                   </thead>
                   <tbody> 
                   ';
+                  echo '<div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>';
                 while($row = $result->fetch_array()){
                   echo '
                   <tr>
