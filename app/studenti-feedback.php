@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,8 +20,6 @@
     <?php
 
     require_once('php/config.php');
-
-    session_start();
 
     if (isset($_SESSION['username'])) {
         if ($_SESSION['tipoUtente'] == 1) {
@@ -67,7 +69,31 @@
     }     
 
     if (isset($feedbackInserito) && $feedbackInserito) {
-      echo "<h1>Feedback inserito con successo.</h1>";
+      echo '
+      <header>
+        <div class="logo">
+          <a href="index.php">
+            <img src="img/logo.png" alt="" />
+          </a>
+        </div>
+        <div class="header-link">
+          <ul>
+            <li>istituto</li>
+            <li>studenti e famiglie</li>
+            <li>modulistica</li>
+            <li>circolari</li>
+          </ul>
+        </div>
+        <div class="user-links">
+        <p> Benvenuto ' . $_SESSION['username'] . ' </p>
+        <a href="studente-page.php"> <i class="fas fa-user"></i> </a>
+        <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
+        </div>
+      </header>
+      <div class="feed-ok">
+      <h1> Feedback inserito con successo</h1>
+      <a href="studente-page.php"><button class="message-btn">Torna alla tua area privata.</button> </a>
+      </div>';
   } else {
       echo '
       <header>
@@ -85,11 +111,12 @@
           </ul>
         </div>
         <div class="user-links">
+        <p> Benvenuto ' . $_SESSION['username'] . ' </p>
         <a href="studente-page.php"> <i class="fas fa-user"></i> </a>
         <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
         </div>
       </header>
-      <div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+      <div class="go-back"><a href="studente-page.php"> <button class="btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back </button> </a></div>
       <div class="container2">
         <h2>Valutazione del Corso</h2>
         <form action="studenti-feedback.php" method="post">
@@ -142,8 +169,10 @@
                 </ul>
               </div>
             </header>
-            <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
+            <div class="feed-ok">
+            <h1> Non sei autorizzato ad accedere a questa pagina</h1>
             <a href="admin-page.php"><button class="message-btn">Vai alla tua area privata.</button> </a>
+            </div>
             ';
           exit();
         } 
@@ -165,8 +194,12 @@
             </ul>
           </div>
         </header>
-        <h1> Non sei autorizzato ad accedere a questa pagina.</h1>
-        <p> <a href="registrazione.php"> Registrati </a>  oppure effettua il <a href="login.php"> Login </a>
+        <div class="notlog">
+        <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
+        <div class="btn-notlog">
+        <a href="registrazione.php"><button class="message-btn">Registrati</button> </a>  <a href="login.php"><button class="message-btn">Accedi</button> </a>
+        </div>
+        </div>
 
         ';
         exit();

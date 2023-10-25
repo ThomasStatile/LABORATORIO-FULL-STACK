@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,21 +61,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Reindirizza l'utente in base al tipo di utente
             if ($userType == 1) {
                 // Utente è uno studente
-                session_start();
+                
                 $_SESSION['username'] = $username;
                 $_SESSION['tipoUtente'] = $userType;
-                header("Location: /LABORATORIO-FULL-STACK/studente-page.php");
+                echo '<script>window.location.href="studente-page.php";</script>';
             } elseif ($userType == 2) {
                 // Utente è un admin
-                session_start();
+                
                 $_SESSION['username'] = $username;
                 $_SESSION['tipoUtente'] = $userType;
-                header("Location: /LABORATORIO-FULL-STACK/admin-page.php");
+                echo '<script>window.location.href="admin-page.php";</script>';
             } else {
                 echo "Tipo di utente non valido.";
             }
         } else {
-            echo "Credenziali non valide. Riprova.";
+          echo "<script>alert('Credenziali non esistenti.');</script>";
         }
     } else {
         echo "Errore nella query: " . $connessione->error;

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,28 +17,15 @@
   <body>
     
     <?php
-    
-    require_once('php/config.php');
   
-    session_start();
-      if (isset($_SESSION['username'])) {
-        if ($_SESSION['tipoUtente'] == 2) {
-      
+      require_once('php/config.php');
     
-          if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $corso = $connessione->real_escape_string($_POST['corso']);
-        
-            $sql = "SELECT concat(u.cognome, u.nome) as Studente, c.corso, f.feedback, f.testo_feedback
-            FROM feedback_corsi f
-            INNER JOIN utenti u ON u.idUtente = f.id_utente
-            INNER JOIN corsi c ON c.idcorso = f.id_corso
-            WHERE corso = '$corso';";
-        
-            $result = $connessione->query($sql);
-            if($result){
-              if ($result->num_rows > 0) {
-                echo '
-                <header>
+      $var = $_SESSION['tipoUtente'];
+
+      if (isset($_SESSION['username'])) {
+        if ($var == '2') {
+          echo '
+          <header>
                   <div class="logo">
                     <a href="index.php">
                       <img src="img/logo.png" alt="" />
@@ -49,11 +40,12 @@
                     </ul>
                   </div>
                   <div class="user-links">
+                  <p> Benvenuto ' . $_SESSION['username'] . ' </p>
                   <a href="admin-page.php"> <i class="fas fa-user"></i> </a>
                   <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
                   </div>
                 </header>
-                <div class="go-back"><a class="button" href="admin-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+                <div class="go-back"><a href="admin-page.php"> <button class="btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back </button> </a></div>
 
 
                 <form method="POST" action="admin-feedback.php">
@@ -71,7 +63,23 @@
                     <button type="submit">Visualizza</button>
                   </div>
                 </form>
-                
+          ';
+          
+    
+          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $corso = $_POST["corso"];
+        
+            $sql = "SELECT concat(u.cognome, u.nome) as Studente, c.corso, f.feedback, f.testo_feedback
+            FROM feedback_corsi f
+            INNER JOIN utenti u ON u.idUtente = f.id_utente
+            INNER JOIN corsi c ON c.idcorso = f.id_corso
+            WHERE corso = '$corso';";
+        
+            $result = $connessione->query($sql);
+            if($result){
+              if ($result->num_rows > 0) {
+                echo '
+              
                 <table>
                 <thead>
                 <tr>
@@ -119,8 +127,10 @@
             </div>
           </header>
 
-          <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
+          <div class="feed-ok">
+          <h1> Non sei autorizzato ad accedere a questa pagina</h1>
           <a href="studente-page.php"><button class="message-btn">Vai alla tua area privata.</button> </a>
+          </div> 
           ';
         exit();
         }
@@ -142,9 +152,12 @@
           </div>
         </header>
 
-        <h1> Non sei autorizzato ad accedere a questa pagina.</h1>
-        <p> <a href="registrazione.php"> Registrati </a>  oppure effettua il <a href="login.php"> Login </a>
-
+        <div class="notlog">
+        <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
+        <div class="btn-notlog">
+        <a href="registrazione.php"><button class="message-btn">Registrati</button> </a>  <a href="login.php"><button class="message-btn">Accedi</button> </a>
+        </div>
+        </div>
         ';
         exit();
       }

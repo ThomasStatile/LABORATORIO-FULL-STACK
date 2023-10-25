@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,8 +18,6 @@
 
     <?php
      require_once('php/config.php');
-
-     session_start();
 
      if (isset($_SESSION['username'])) {
       if ($_SESSION['tipoUtente'] == 1) {
@@ -63,6 +65,7 @@
           <a href="logout.php"> <i class="fas fa-sign-out"></i> </a> 
           </div>
         </header>
+        <div class="home-background"></div>
         ';
       }
       }else {
@@ -83,6 +86,7 @@
           </div>
         </header>
 
+        <div class="home-background">
         <section class="hero1">
           <a href="registrazione.php">
             <div class="register form">
@@ -97,6 +101,7 @@
             </div>
           </a>
         </section>
+        </div>
         ';
       }
    

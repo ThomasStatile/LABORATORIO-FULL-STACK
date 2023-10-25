@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost";
+$servername = "laboratorio-full-stack-db-1";
 $user = "root";
-$port = "3307";
-$password = "milano2023";
+$port = "3306";
+$password = "root";
 $database = "fullstack_laboratorio";
 
 $connessione = new mysqli($servername, $user, $password, $database, $port);

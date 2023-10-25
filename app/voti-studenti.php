@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +21,6 @@
 
     require_once('php/config.php');
 
-    session_start();
 
     if (isset($_SESSION['username'])) {
         if ($_SESSION['tipoUtente'] == 1) {
@@ -49,11 +52,12 @@
                     </ul>
                   </div>
                   <div class="user-links">
+                  <p> Benvenuto ' . $_SESSION['username'] . ' </p>
                   <a href="studente-page.php"> <i class="fas fa-user"></i> </a>
                   <a href="logout.php"> <i class="fas fa-sign-out iconlogout"></i> </a> 
                   </div>
                 </header>
-                <div class="go-back"><a class="button" href="studente-page.php">Go Back<i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+                <div class="go-back"><a href="studente-page.php"> <button class="btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>Go Back </button> </a></div>
                 <table>
                 <thead>
                 <tr>
@@ -97,8 +101,8 @@
                 </ul>
               </div>
             </header>
-            <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
-            <a href="admin-page.php"><button class="message-btn">Vai alla tua area privata.</button> </a>
+            <div class="feed-ok"><h1> Non sei autorizzato ad accedere a questa pagina</h1>
+            <a href="admin-page.php"><button class="message-btn">Vai alla tua area privata.</button> </a></div>
             ';
           exit();
         } 
@@ -120,9 +124,12 @@
             </ul>
           </div>
         </header>
-        <h1> Non sei autorizzato ad accedere a questa pagina.</h1>
-        <p> <a href="registrazione.php"> Registrati </a>  oppure effettua il <a href="login.php"> Login </a>
-
+        <div class="notlog">
+        <div class="message"><h1> Non sei autorizzato ad accedere a questa pagina</h1></div>
+        <div class="btn-notlog">
+        <a href="registrazione.php"><button class="message-btn">Registrati</button> </a>  <a href="login.php"><button class="message-btn">Accedi</button> </a>
+        </div>
+        </div>
         ';
         exit();
     }
